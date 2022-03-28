@@ -9,7 +9,16 @@ const {username,room} = Qs.parse(location.search,{
 })
 
 const socket = io()
+
+//join room
 socket.emit('joinRoom',{username,room})
+
+//get room and users
+socket.on('roomUsers',({room,users})=>{
+    RoomName(room);
+    UsersList(users);
+})
+
 
 socket.on('message',message => {
     outputMessage(message)
@@ -39,5 +48,5 @@ function RoomName(room){
 
 //add users to dom
 function UsersList(users){
-    userList.innerHTML = `${users.map(user=> `<li> ${user.username} </li>`).join()}`
+    userList.innerHTML = `${users.map(user=> `<li> ${user.username} </li>`).join('')}`
 }
