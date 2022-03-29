@@ -16,6 +16,8 @@ const io = socketio(server)
 
 app.use(express.static(path.join(__dirname,'public')))
 
+const PORT = process.env.PORT || 9000;
+
 const botName = 'Chat Bot ';
 
 // client connect
@@ -38,9 +40,6 @@ io.on('connection',socket => {
             users: getRoomUsers(user.room)
         })
     })
-
-   
-
 
     // Listen for chatmessages 
     socket.on('chatMessage',(msg)=>{
@@ -65,7 +64,7 @@ io.on('connection',socket => {
     })
 })
 
-server.listen(9000,()=>{
-    console.log('Server Running on port 9000')
+server.listen(PORT,()=>{
+    console.log(`Server Running on port ${PORT}`)
 })
 

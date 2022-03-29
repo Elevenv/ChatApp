@@ -31,12 +31,7 @@ chatForm.addEventListener('submit',(e)=> {
 
     //get message text
     const msg = e.target.elements.msg.value;
-    msg = msg.trim();
 
-    if (!msg) {
-      return false;
-    }
-  
     // Emit message to server
     socket.emit('chatMessage',msg)
 
